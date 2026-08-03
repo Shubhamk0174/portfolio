@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, ReactNode } from "react";
 import { useTheme } from "./ThemeProvider";
 
 import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
+import Link from "next/link";
 
 const CHARS = '!<>-_\\/[]{}—=+*^?#01';
 
@@ -187,12 +188,12 @@ export function Hero() {
         </p>
 
         <div className={`flex gap-[14px] flex-wrap mt-[34px] transition-all duration-600 ease-out ${showRest.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[8px]'}`}>
-          <a href="#work" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-amber text-ink border border-amber hover:opacity-80 hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
+          <Link href="/projects" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-amber text-ink border border-amber hover:opacity-80 hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
             View my work <span aria-hidden="true">→</span>
-          </a>
-          <a href="#contact" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-transparent text-paper border border-line hover:border-fog hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
+          </Link>
+          <Link href="/contact" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-transparent text-paper border border-line hover:border-fog hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
             Get in touch
-          </a>
+          </Link>
         </div>
       </main>
 

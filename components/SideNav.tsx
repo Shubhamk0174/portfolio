@@ -15,8 +15,8 @@ export function SideNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  const fontSize = isHome ? "text-[1.25rem]" : "text-[0.8rem]";
-  const gapSize = isHome ? "gap-10" : "gap-5";
+  const fontSize = isHome ? "text-[1.6rem]" : "text-[0.8rem]";
+  const gapSize = isHome ? "gap-14" : "gap-5";
   const translateHover = isHome ? "hover:-translate-x-3" : "hover:-translate-x-2";
   const bracketTranslateLeft = isHome ? "-translate-x-6" : "-translate-x-4";
   const bracketTranslateRight = isHome ? "translate-x-6" : "translate-x-4";
@@ -24,8 +24,15 @@ export function SideNav() {
   const bracketMarginRight = isHome ? "ml-4" : "ml-3";
 
   return (
-    <nav className="fixed right-[clamp(24px,5vw,64px)] top-[clamp(24px,4vw,48px)] hidden lg:flex z-50">
+    <nav className={`fixed hidden lg:flex z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      isHome 
+        ? "top-[40%] -translate-y-1/2 right-[clamp(40px,8vw,120px)]" 
+        : "top-[clamp(24px,4vw,48px)] right-[clamp(24px,5vw,64px)]"
+    }`}>
       <div className="relative flex">
+        {isHome && (
+          <div className="absolute inset-0 -inset-y-12 -inset-x-24 bg-gradient-to-l from-panel/40 to-transparent blur-2xl -z-10 pointer-events-none rounded-full" />
+        )}
         <ul className={`flex flex-col items-end group/nav transition-all duration-700 ease-out ${gapSize}`}>
           {navItems.map((item) => (
             <li key={item.name} className="relative flex items-center justify-end group/link cursor-pointer">
@@ -36,7 +43,7 @@ export function SideNav() {
                 <span className={`opacity-0 transition-all duration-700 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0 text-amber font-medium ${bracketTranslateLeft} ${bracketMarginLeft}`}>
                   [
                 </span>
-                <span className="flex gap-3 transition-all duration-700 ease-out text-fog group-hover/nav:opacity-30 group-hover/link:!opacity-100 group-hover/link:text-paper font-semibold">
+                <span className={`flex gap-3 transition-all duration-700 ease-out group-hover/nav:opacity-30 group-hover/link:!opacity-100 group-hover/link:text-paper font-semibold ${isHome ? 'text-fog hover:text-paper drop-shadow-md' : 'text-fog'}`}>
                   <span className="opacity-40 group-hover/link:text-amber group-hover/link:opacity-100 transition-colors duration-700">{item.id}.</span>
                   <span>{item.name}</span>
                 </span>
