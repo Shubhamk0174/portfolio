@@ -6,8 +6,14 @@ import { useRouter } from "next/navigation";
 
 export default function NotFound() {
   const [text, setText] = useState("");
-  const fullText = "ERROR 404: Path lost in the void.\n\nAttempting to locate coordinates...\nFailed.\n\nWould you like to return to the root directory? [Y/n]";
+  const [isGlitching, setIsGlitching] = useState(false);
+  const fullText = "ERROR 404: Path Not Found.\n\nAttempting to locate coordinates...\nFailed.\n\nWould you like to return to the root directory? [Y/n]";
   const router = useRouter();
+
+  const triggerGlitch = () => {
+    setIsGlitching(true);
+    setTimeout(() => setIsGlitching(false), 300);
+  };
 
   // Typewriter effect
   useEffect(() => {
@@ -27,6 +33,8 @@ export default function NotFound() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key.toLowerCase() === 'y' || e.key === 'Enter') {
         router.push('/');
+      } else if (e.key.toLowerCase() === 'n') {
+        triggerGlitch();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -38,7 +46,7 @@ export default function NotFound() {
       <div className="grid-bg opacity-30"></div>
       <div className="vignette"></div>
       
-      <div className="relative z-10 w-full max-w-2xl bg-ink border border-line/40 p-8 rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(0,220,130,0.05)] backdrop-blur-sm">
+      <div className={`relative z-10 w-full max-w-2xl bg-ink border border-line/40 p-8 rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(0,220,130,0.05)] backdrop-blur-sm ${isGlitching ? 'animate-glitch' : ''}`}>
         {/* Terminal Header */}
         <div className="flex items-center justify-between mb-6 border-b border-line/40 pb-4">
           <div className="flex gap-2">
@@ -50,9 +58,23 @@ export default function NotFound() {
         </div>
         
         {/* Terminal Body */}
-        <div className="font-mono text-sm sm:text-base leading-relaxed text-amber whitespace-pre-wrap min-h-[160px]">
-          {text}
-          <span className="animate-blink-cursor inline-block w-2 h-[1em] bg-amber align-middle ml-1 translate-y-[2px]"></span>
+        <div className="font-mono text-sm sm:text-base leading-relaxed text-amber whitespace-pre-wrap min-h-40">
+          {text.includes("[Y/n]") ? (
+            <>
+              {text.split("[Y/n]")[0]}
+              [<span 
+                className="cursor-pointer hover:text-white transition-colors" 
+                onClick={() => router.push('/')}
+              >Y</span>/<span 
+                className="cursor-pointer hover:text-red-500 transition-colors" 
+                onClick={triggerGlitch}
+              >n</span>]
+              {text.split("[Y/n]")[1]}
+            </>
+          ) : (
+            text
+          )}
+          <span className="animate-blink-cursor inline-block w-2 h-[1em] bg-amber align-middle ml-1 translate-y-0.5"></span>
         </div>
         
         {/* Action Button (Fades in when typing completes) */}

@@ -31,28 +31,31 @@ export function SideNav() {
     }`}>
       <div className="relative flex">
         {isHome && (
-          <div className="absolute inset-0 -inset-y-12 -inset-x-24 bg-gradient-to-l from-panel/40 to-transparent blur-2xl -z-10 pointer-events-none rounded-full" />
+          <div className="absolute inset-0 -inset-y-12 -inset-x-24 bg-linear-to-l from-panel/40 to-transparent blur-2xl -z-10 pointer-events-none rounded-full" />
         )}
         <ul className={`flex flex-col items-end group/nav transition-all duration-700 ease-out ${gapSize}`}>
-          {navItems.map((item) => (
-            <li key={item.name} className="relative flex items-center justify-end group/link cursor-pointer">
-              <Link 
-                href={item.href}
-                className={`flex items-center font-mono tracking-[0.2em] transition-all duration-700 ease-out ${fontSize} ${translateHover}`}
-              >
-                <span className={`opacity-0 transition-all duration-700 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0 text-amber font-medium ${bracketTranslateLeft} ${bracketMarginLeft}`}>
-                  [
-                </span>
-                <span className={`flex gap-3 transition-all duration-700 ease-out group-hover/nav:opacity-30 group-hover/link:!opacity-100 group-hover/link:text-paper font-semibold ${isHome ? 'text-fog hover:text-paper drop-shadow-md' : 'text-fog'}`}>
-                  <span className="opacity-40 group-hover/link:text-amber group-hover/link:opacity-100 transition-colors duration-700">{item.id}.</span>
-                  <span>{item.name}</span>
-                </span>
-                <span className={`opacity-0 transition-all duration-700 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0 text-amber font-medium ${bracketTranslateRight} ${bracketMarginRight}`}>
-                  ]
-                </span>
-              </Link>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <li key={item.name} className="relative flex items-center justify-end group/link cursor-pointer">
+                <Link 
+                  href={item.href}
+                  className={`flex items-center font-mono tracking-[0.2em] transition-all duration-700 ease-out ${fontSize} ${translateHover}`}
+                >
+                  <span className={`transition-all duration-700 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0 text-amber font-medium ${bracketMarginLeft} ${isActive ? 'opacity-100 translate-x-0' : `opacity-0 ${bracketTranslateLeft}`}`}>
+                    [
+                  </span>
+                  <span className={`flex gap-3 transition-all duration-700 ease-out group-has-[:hover]/nav:opacity-30 group-hover/link:opacity-100! group-hover/link:text-paper font-semibold ${isActive ? 'text-paper' : (isHome ? 'text-fog hover:text-paper drop-shadow-md' : 'text-fog')}`}>
+                    <span className={`transition-colors duration-700 group-hover/link:text-amber group-hover/link:opacity-100 ${isActive ? 'text-amber opacity-100' : 'opacity-40'}`}>{item.id}.</span>
+                    <span>{item.name}</span>
+                  </span>
+                  <span className={`transition-all duration-700 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0 text-amber font-medium ${bracketMarginRight} ${isActive ? 'opacity-100 translate-x-0' : `opacity-0 ${bracketTranslateRight}`}`}>
+                    ]
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>

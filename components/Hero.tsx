@@ -170,35 +170,35 @@ export function Hero() {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center py-[clamp(32px,6vw,48px)] px-[clamp(24px,6vw,96px)] max-w-[1100px]">
+      <main className="relative z-10 flex-1 flex flex-col justify-center py-[clamp(32px,6vw,48px)] px-[clamp(24px,6vw,96px)] max-w-275">
         <h1 className="m-0 font-mono font-bold text-[clamp(2rem,5.4vw,4.4rem)] leading-[1.12] tracking-[-0.01em] text-paper min-h-[1.2em]">
           <span>{displayNodes.length > 0 ? displayNodes : <>&nbsp;</>}</span>
-          <span className={`inline-block ml-[2px] text-amber transform translate-y-[2px] ${isRevealed ? 'animate-blink-cursor opacity-100' : 'opacity-0'}`}>
+          <span className={`inline-block ml-0.5 text-amber transform translate-y-0.5 ${isRevealed ? 'animate-blink-cursor opacity-100' : 'opacity-0'}`}>
             ▍
           </span>
         </h1>
 
-        <p className={`font-mono font-semibold text-[clamp(0.9rem,1.4vw,1.05rem)] text-amber mt-[18px] transition-all duration-600 ease-out ${showRest.byline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[8px]'}`}>
+        <p className={`font-mono font-semibold text-[clamp(0.9rem,1.4vw,1.05rem)] text-amber mt-4.5 transition-all duration-600 ease-out ${showRest.byline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
           Shubham Kumar — Full Stack Developer
         </p>
 
-        <p className={`font-sans text-[clamp(1rem,1.3vw,1.15rem)] leading-[1.65] text-fog max-w-[620px] mt-[22px] transition-all duration-600 ease-out ${showRest.sub ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[8px]'}`}>
+        <p className={`font-sans text-[clamp(1rem,1.3vw,1.15rem)] leading-[1.65] text-fog max-w-155 mt-5.5 transition-all duration-600 ease-out ${showRest.sub ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
           Currently dedicating my time to <strong className="text-paper font-semibold">Continuous Learning</strong> —
           exploring modern web technologies and mastering everything from database architecture to the final user experience.
         </p>
 
-        <div className={`flex gap-[14px] flex-wrap mt-[34px] transition-all duration-600 ease-out ${showRest.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[8px]'}`}>
-          <Link href="/projects" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-amber text-ink border border-amber hover:opacity-80 hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
+        <div className={`flex gap-3.5 flex-wrap mt-8.5 transition-all duration-600 ease-out ${showRest.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+          <Link href="/projects" className="font-mono text-[0.9rem] font-semibold no-underline py-3.25 px-5.5 rounded-md inline-flex items-center gap-2 transition-all duration-150 ease-out bg-amber text-ink border border-amber hover:opacity-80 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
             View my work <span aria-hidden="true">→</span>
           </Link>
-          <Link href="/contact" className="font-mono text-[0.9rem] font-semibold no-underline py-[13px] px-[22px] rounded-md inline-flex items-center gap-[8px] transition-all duration-150 ease-out bg-transparent text-paper border border-line hover:border-fog hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
+          <Link href="/contact" className="font-mono text-[0.9rem] font-semibold no-underline py-3.25 px-[22px] rounded-md inline-flex items-center gap-2 transition-all duration-150 ease-out bg-transparent text-paper border border-line hover:border-fog hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-offset-[3px] focus-visible:outline-amber w-full sm:w-auto justify-center">
             Get in touch
           </Link>
         </div>
       </main>
 
       {/* Ticker */}
-      <footer className="relative z-10 border-t border-line bg-panel overflow-hidden py-[14px]">
+      <footer className="relative z-10 border-t border-line bg-panel overflow-hidden py-3.5">
         <div className="flex w-max animate-scroll-ticker">
           <span className="font-mono text-[0.78rem] tracking-[0.14em] text-fog whitespace-nowrap pr-0">
             {TICKER_ITEMS.map((item, i) => (

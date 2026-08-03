@@ -85,8 +85,8 @@ export default function ProjectsPage() {
             <div
               key={project.id}
               onClick={() => setActiveId(project.id)}
-              className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.3,1)] flex flex-col
-                ${isActive ? "flex-[6] md:flex-[10]" : "flex-[1] hover:flex-[1.5] md:hover:flex-[1.5]"}
+              className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-800 ease-[cubic-bezier(0.25,1,0.3,1)] flex flex-col
+                ${isActive ? "flex-6 md:flex-10" : "flex-1 hover:flex-[1.5] md:hover:flex-[1.5]"}
               `}
             >
                {/* Background Image */}
@@ -94,13 +94,12 @@ export default function ProjectsPage() {
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${
+                    className={`w-full h-full object-cover transition-transform duration-1200 ease-out ${
                       isActive ? "scale-100" : "scale-[1.15] group-hover:scale-110"
                     } ${isActive ? "opacity-40" : "opacity-30 group-hover:opacity-50"}`}
                   />
-                  {/* Overlay for inactive */}
-                  <div className={`absolute inset-0 bg-ink transition-opacity duration-700 ${isActive ? 'opacity-10' : 'opacity-70 group-hover:opacity-40'}`}></div>
-                  <div className={`absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-90' : 'opacity-70'}`}></div>
+                  {/* Overlay restricted to the bottom-left corner where the text is */}
+                  <div className={`absolute inset-0 bg-linear-to-tr from-ink via-ink/30 to-transparent transition-opacity duration-700 pointer-events-none ${isActive ? 'opacity-100' : 'opacity-80 group-hover:opacity-60'}`}></div>
                </div>
 
                {/* Content Container */}
@@ -111,7 +110,7 @@ export default function ProjectsPage() {
                        {project.id}
                      </span>
                      {isActive && (
-                       <span className="h-[1px] w-8 md:w-12 bg-line hidden md:block animate-pulse-green"></span>
+                       <span className="h-px w-8 md:w-12 bg-line hidden md:block animate-pulse-green"></span>
                      )}
                      <span className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0 text-paper/80' : 'opacity-0 translate-y-4'}`}>
                        {project.category}
@@ -119,7 +118,7 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Title */}
-                  <div className="relative h-[40px] md:h-[auto]">
+                  <div className="relative h-10 md:h-auto">
                     <h2 className={`font-bold uppercase transition-all duration-700 md:delay-100 whitespace-nowrap 
                       ${isActive 
                         ? 'text-[clamp(1.5rem,3vw,3.5rem)] leading-none text-paper relative z-10 translate-y-0' 
@@ -130,17 +129,11 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Expanded Only Content */}
-                  <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isActive ? 'max-h-[400px] opacity-100 mt-2 md:mt-4 delay-200' : 'max-h-0 opacity-0 mt-0'}`}>
+                  <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isActive ? 'max-h-100 opacity-100 mt-2 md:mt-4 delay-200' : 'max-h-0 opacity-0 mt-0'}`}>
                     <p className="text-fog max-w-xl font-mono text-[10px] md:text-sm leading-relaxed mb-4 md:mb-6">
                       {project.desc}
                     </p>
-                    <div className="flex flex-wrap gap-2 md:gap-3 mb-6">
-                      {project.tech.map((t) => (
-                        <span key={t} className="text-[8px] md:text-[10px] font-mono tracking-widest text-paper border border-line px-2 py-1 md:px-3 rounded-full bg-panel/30 backdrop-blur-sm">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+
                     
                     <Link 
                       href={`/projects/${project.id}`}
@@ -160,7 +153,7 @@ export default function ProjectsPage() {
         <div className="absolute bottom-[clamp(16px,4vh,32px)] left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full border border-line bg-panel/60 backdrop-blur-md shadow-2xl">
           <button 
             onClick={handlePrev}
-            className="text-xs font-mono tracking-widest text-fog hover:text-amber transition-colors flex items-center gap-2 group"
+            className="text-xs cursor-pointer font-mono tracking-widest text-fog hover:text-amber transition-colors flex items-center gap-2 group"
             aria-label="Previous Projects"
           >
             <span className="text-amber group-hover:-translate-x-1 transition-transform">&larr;</span> PREV
@@ -181,7 +174,7 @@ export default function ProjectsPage() {
 
           <button 
             onClick={handleNext}
-            className="text-xs font-mono tracking-widest text-fog hover:text-amber transition-colors flex items-center gap-2 group"
+            className="text-xs cursor-pointer font-mono tracking-widest text-fog hover:text-amber transition-colors flex items-center gap-2 group"
             aria-label="Next Projects"
           >
             NEXT <span className="text-amber group-hover:translate-x-1 transition-transform">&rarr;</span>
